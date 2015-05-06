@@ -1,20 +1,24 @@
 #include <iostream>
 #include <iterator>
+#include <vector>
 
-using std::begin; using std::end; using std::cout; using std::endl;
-
-int main()
+int main() 
 {
-    int arr[10];
-    int *b = begin(arr);
-    int *e = end(arr);
+    int arr1[] = {0, 1, 2, 3, 4, 5};
+    int arr2[] = {0, 1, 2, 3, 4};
+    bool result = true;
     
-    for (int *i = b; i != e; ++i)
-      *i = 0;
-      
-    for (auto i : arr)
-      cout << i << " ";
-    cout << endl;
-
+    auto it1 = std::begin(arr1), it2 = std::begin(arr2);
+    for ( ; it1 != std::end(arr1) && it2 != std::end(arr2); it1++, it2++) {
+        if (*it1 != *it2) {
+            result = false;
+            break;
+        }
+    }
+    
+    result = result && it1 == std::end(arr1) && it2 == std::end(arr2);
+    
+    std::cout << result << std::endl;
+    
     return 0;
 }
